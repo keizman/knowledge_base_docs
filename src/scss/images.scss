@@ -1,0 +1,31 @@
+/** General: Images */
+@use './mixins' as *;
+
+/** Dark Mode images border */
+.theme-doc-markdown.markdown [class*="themedImage--dark"],
+.theme-doc-markdown.markdown [class*="themedComponent"] {
+  border: solid 1px var(--strapi-neutral-200);
+  border-radius: 4px;
+}
+
+.markdown img:not([src^="data:image/svg+xml"]) {
+  margin-bottom: 26px;
+}
+
+
+img[src^="data:image/svg+xml"] {
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+li > img {
+  margin-bottom: 0 !important;
+}
+
+@include dark {
+  img[src^="data:image/svg+xml"] {
+    background-color: white;
+  }
+}
+

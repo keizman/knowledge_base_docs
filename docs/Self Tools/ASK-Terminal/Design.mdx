@@ -1,0 +1,70 @@
+## 简介
+ASK Terminal AI 是一个功能强大的命令行工具，旨在解决开发者和系统管理员在日常工作中的两个常见痛点：
+- 记不住或不确定命令参数时快速获取并执行正确命令
+- 在终端环境中直接与 AI 进行交互，无需切换到浏览器或其他应用
+
+该工具支持 OpenAI、Anthropic、Google 等多家 AI 服务提供商，并通过兼容模式允许用户指定特定模型。ASK Terminal AI 设计轻量化、响应迅速，适合各种终端使用场景。
+
+## 功能
+1.输入 ask 不带任何参数进入虚拟 Terminal 模式, 当查询命令时 AI将返回 list 格式字符, user 按 上下键选择命令(若有多个), e 进入修改命令模式, enter 结束修改, 再次 enter 执行命令  
+2.正常 Terminal 下 输入 ask "say hi" 进行 chat, 在结尾 " 符号未输入时可通过 shift + enter 进行换行, 之后等待 对应 AI 返回结果即可  
+3.以上两种模式都可以指定配置中任意配置项, 优先级高于配置, 适用于零时需要使用其它模型的场景  
+
+`暂不支持多轮对话`
+## 模型选型
+
+## 配置
+在 /etc/askta/config.yaml 进行配置  
+或通过-c 选项来指定配置文件位置
+
+包含以下配置
+```json
+# 默认附带已注释的 base_url 示例
+# https://api.openai.com
+# https://generativelanguage.googleapis.com
+
+"base_url": ""
+"api_key": ""
+"model_name": ""
+
+"private_mode": ture or false, default false
+"syt_prompt": "在这里添加默认上下文, 若添加则请求时会带上. 比如: 当前运行环境为 Linux"
+"provider": "openai-com"
+# provider  默认支持的供应商, 1.openai 2.anthropic 3.google 4.openai-com, default 4, 如果填的是 1/2/3 都不需要再写 base_url, 4 则必须填写所有内容
+```
+
+
+## 秘钥设计
+`用户第一次填入后 apikey 将被自动重写, 使用 hash 指定字符方式对 秘钥进行加密, 加密后的串为 encry_{加密串} 当使用时解密, 确保用户 秘钥安全`
+
+
+
+当前能做到即使和别人共用机器也能保证财产安全
+
+
+## 技术选用
+使用 go 语言写 
+
+给出一键安装脚本
+
+
+## prompt 设计
+
+上下文: 若 private_mode  = false 则自动带上用户当前目录结构, 
+
+Current dir
+ 
+以下是一个 prompt 方式
+```
+curl https://api.inceptionlabs.ai/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer 123" \
+  -d '{
+    "model": "mercury-coder-small",
+    "messages": [
+      {"role": "user", "content": "how to  compress 123 folder as a gz ,in linux,  give me command in this format: command_1=tar -zxvf 123.tar.gz, command_2=, no more reply"}
+    ],
+    "max_tokens": 500
+  }'
+
+```

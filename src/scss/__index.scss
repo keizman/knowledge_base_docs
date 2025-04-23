@@ -1,0 +1,53 @@
+/**
+ * Any CSS included here will be global.
+ * The classic template bundles Infima by default.
+ * Infima is a CSS framework designed to work well for content-centric websites.
+ */
+
+/** Core */
+@use '__tokens-index' as *;
+@forward 'mixins';
+@forward 'tokens';
+@forward 'tokens-overrides';
+
+/** Base */
+@forward 'fonts';
+@forward 'base';
+
+/** Components */
+@use 'admonition.scss';
+@use 'api-call.scss';
+@use 'announcement-bar.scss';
+@use 'badge.scss';
+@use 'breadcrumbs.scss';
+@use 'breaking-change-id-card.scss';
+
+@use 'card.scss';
+@use 'code.scss';  // markdown topic
+@use 'code-block.scss';
+@use 'columns.scss';
+@use 'container.scss';
+@use 'custom-doc-cards.scss';
+
+@use 'custom-search-bar.scss';
+@use 'details.scss';
+@use 'diagrams.scss';
+@use 'footer.scss';
+@use 'grid.scss';
+@use 'guideflow.scss';
+@use 'icons.scss';
+@use 'images.scss';
+// @use 'kapa.scss';
+
+@use 'markdown.scss';
+@use 'medium-zoom.scss';
+@use 'navbar.scss'; // logo size
+@use 'pagination-nav.scss';
+@use 'release-notes.scss';
+@use 'search.scss';
+@use 'scene.scss';
+@use 'sidebar.scss';
+@use 'table.scss';
+@use 'tabs.scss';
+@use 'table-of-contents.scss';
+@use 'typography.scss'; // topic line height

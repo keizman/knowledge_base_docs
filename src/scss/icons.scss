@@ -1,0 +1,23 @@
+/** Use this later to define custom styles for icons
+*/
+article {
+  .strapi-icons {
+    position: relative;
+    top: 2px;
+  }
+}
+
+.strapi-icons.external-link::before {
+  text-decoration: none !important;
+  position: relative;
+  top: -2px;
+}
+
+// Homepage category icons at the top of cards
+.plugin-pages {
+  [class*="card-category-icon-container"] {
+    .strapi-icons::before {
+      font-size: 20px !important;
+    }
+  }
+}

@@ -1,0 +1,131 @@
+/** Component: API Call / Request / Response */
+@use './mixins' as *;
+
+:root {
+  --custom-api-call-color: var(--strapi-neutral-800);
+  --custom-api-call-gap: var(--strapi-spacing-4);
+  --custom-api-call-heading-font-size: var(--strapi-font-size-sm);
+  --custom-api-call-heading-font-weight: 500;
+  --custom-api-call-heading-py: var(--strapi-spacing-2);
+  --custom-api-call-heading-px: var(--strapi-spacing-4);
+  --custom-api-call-radius: 4px;
+  --custom-api-call-response-heading-background-color: var(--strapi-neutral-100);
+  --custom-api-call-response-content-background-color: var(--strapi-neutral-0);
+  --custom-api-call-request-heading-background-color: var(--strapi-neutral-100);
+  --custom-api-call-request-content-background-color: var(--strapi-neutral-0);
+  --custom-api-call-border-color: var(--strapi-neutral-200);
+  --custom-code-block-background-color-highlighted: var(--strapi-neutral-200);
+}
+
+.api-call {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--custom-api-call-gap);
+  margin-bottom: var(--custom-api-call-gap);
+
+  &__request__content,
+  &__request__heading,
+  &__response__content,
+  &__response__heading {
+    background-color: var(--custom-api-call-background-color);
+    color: var(--custom-api-call-color);
+
+    code {
+      background-color: transparent;
+    }
+  }
+
+  &__request,
+  &__response {
+    border-radius: var(--custom-api-call-radius);
+    // border: solid 1px var(--custom-api-call-border-color);
+
+    &__heading,
+    &__content {
+      *:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &__heading {
+      border-top-left-radius: var(--custom-api-call-radius);
+      border-top-right-radius: var(--custom-api-call-radius);
+      border: solid 1px var(--custom-api-call-border-color);
+      border-bottom: none;
+      font-size: var(--custom-api-call-heading-font-size);
+      font-weight: var(--custom-api-call-heading-font-weight);
+      padding: var(--custom-api-call-heading-py) var(--custom-api-call-heading-px);
+    }
+
+    &__content {
+      border-bottom-left-radius: var(--custom-api-call-radius);
+      border-bottom-right-radius: var(--custom-api-call-radius);
+      border: solid 1px var(--custom-api-call-border-color);
+      padding: var(--custom-api-call-content-py) var(--custom-api-call-content-px);
+    }
+  }
+
+  &__request {
+    &__heading {
+      --custom-api-call-background-color: var(--custom-api-call-request-heading-background-color);
+    }
+
+    &__content {
+      --custom-api-call-background-color: var(--custom-api-call-request-content-background-color);
+      --custom-api-call-content-py: var(--custom-api-call-heading-px);
+      --custom-api-call-content-px: var(--custom-api-call-heading-px);
+
+      --custom-code-block-background-color: var(--custom-api-call-response-heading-background-color);
+
+      --custom-code-background-color: var(--custom-api-call-response-heading-background-color);
+      --custom-code-border-color: transparent;
+      --custom-code-color: currentColor;
+    }
+
+    & + p {
+      margin-top: 24px;
+    }
+  }
+
+  &__response {
+    &__heading {
+      --custom-api-call-background-color: var(--custom-api-call-response-heading-background-color);
+    }
+
+    &__content {
+      --custom-api-call-background-color: var(--custom-api-call-response-content-background-color);
+
+      --custom-code-block-background-color: var(--custom-api-call-response-content-background-color);
+    }
+
+  }
+
+  .theme-code-block {
+    border-radius: var(--custom-api-call-radius);
+
+    &-highlighted-line {
+      background-color: var(--strapi-neutral-150) !important;
+    }
+  }
+}
+
+/** Dark mode */
+@include dark {
+  --custom-api-call-color: var(--strapi-neutral-1000);
+
+  --custom-api-call-request-heading-background-color: var(--strapi-neutral-100);
+  --custom-api-call-request-content-background-color: transparent;
+
+  --custom-api-call-response-heading-background-color: var(--strapi-neutral-100);
+  --custom-api-call-response-content-background-color: transparent;
+
+  .api-call {
+    &__response__content,
+    &__request__content {
+      pre {
+        border: solid 1px transparent !important;
+      }
+    }
+  }
+}

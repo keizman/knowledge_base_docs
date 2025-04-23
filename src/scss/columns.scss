@@ -1,0 +1,23 @@
+/** Components: Columns */
+@use './mixins' as *;
+
+.column {
+  &__title {
+    font-weight: 700;
+    margin-bottom: var(--strapi-spacing-1);
+  }
+}
+
+/** Responsive */
+@include medium-up {
+  .columns {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--strapi-spacing-4);
+
+    > .column {
+      flex: 1;
+      max-width: 50%;
+    }
+  }
+}

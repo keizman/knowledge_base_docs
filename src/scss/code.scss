@@ -1,0 +1,108 @@
+/** Element: Code */
+@use './mixins' as *;
+
+:root body {
+  --custom-code-background-color: var(--strapi-primary-100);
+  --custom-code-border-color: var(--strapi-primary-200);
+  --custom-code-border-radius: var(--strapi-spacing-1);
+  --custom-code-color: var(--strapi-primary-600);
+  --custom-code-font-size: 81.25%;
+  --custom-code-font-size: var(--strapi-font-size-sm);
+  --custom-code-font-family:
+    "SFMono-Regular",
+    "Menlo",
+    "Monaco",
+    "Consolas",
+    "Liberation Mono",
+    "Courier New",
+    monospace
+  ;
+
+  --ifm-code-background: var(--custom-code-background-color);
+  --ifm-code-border-radius: var(--custom-code-border-radius);
+  --ifm-code-padding-horizontal: var(--strapi-spacing-2);
+  --ifm-code-padding-vertical: var(--strapi-spacing-1);
+  --ifm-code-font-family: var(--custom-code-font-family);
+
+  --ifm-code-font-size: var(--custom-code-font-size);
+}
+
+pre {
+  --ifm-code-font-size: 100%;
+
+  code {
+    --ifm-code-font-size: var(--custom-code-font-size);
+
+    font-size: var(--ifm-code-font-size);
+  }
+}
+
+// h1, h2, h3, h4, h5 {
+//   display: inline-block !important; inline-block 元素会在同一行显示，除非强制换行
+
+// }
+
+h1, h2, h3, h4, h5 {
+  display: block !important; /* 或者完全移除这条规则 */
+}
+h1, h2, h3, li, p, table {
+  code {
+    background-color: var(--custom-code-background-color);
+    border-color: var(--custom-code-border-color);
+    color: var(--custom-code-color);
+    padding: 2px 4px;
+  }
+
+  a code {
+    --custom-code-background-color: var(--strapi-primary-100);
+    --custom-code-border-color: var(--strapi-primary-200);
+    --custom-code-color: var(--ifm-link-color);
+
+    font-weight: var(--ifm-font-weight-bold);
+  }
+}
+
+h2, h3 {
+  code {
+    padding: 4px 8px;
+    vertical-align: baseline;
+    position: relative;
+    top: -2px;
+    margin-right: 6px;
+  }
+}
+
+/** Special styles when using the tag `code` inside a HTML table. */
+table {
+  code {
+    --custom-code-background-color: var(--custom-code-on-table-background-color, var(--strapi-neutral-150));
+    --custom-code-border-color: var(--custom-code-on-table-border-color, var(--strapi-neutral-200));
+    --custom-code-color: var(--custom-code-on-table-color, var(--strapi-neutral-800));
+  }
+}
+
+/** Dark mode */
+@include dark {
+  body {
+    --custom-code-background-color: var(--strapi-neutral-600);
+    --custom-code-border-color: var(--strapi-neutral-600);
+    --custom-code-color: var(--strapi-neutral-800);
+  }
+
+  pre code,
+  code {
+    --custom-code-color: var(--strapi-neutral-1000);
+    --custom-code-background-color: var(--strapi-neutral-150);
+    --custom-code-border-color: var(--strapi-neutral-600) !important;
+  }
+
+  h1, h2, h3, li, p, table {
+    a code {
+      --custom-code-background-color: var(--strapi-neutral-150);
+      --custom-code-border-color: var(--strapi-neutral-600);
+      --custom-code-color: var(--strapi-primary-600);
+
+      text-decoration: none;
+    }
+  }
+}

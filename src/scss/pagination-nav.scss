@@ -1,0 +1,26 @@
+/** Component: Pagination Nav */
+@use './mixins' as *;
+
+.pagination-nav {
+  --ifm-spacing-horizontal: var(--strapi-spacing-4);
+
+  &__link {
+    &:hover {
+      --ifm-pagination-nav-color-hover: var(--custom-card-border-color);
+    }
+  }
+}
+
+@include medium-up {
+  .pagination-nav__link {
+    &--prev {
+      position: relative;
+      left: -16px;
+    }
+
+    &--next {
+      position: relative;
+      right: -16px;
+    }
+  }
+}

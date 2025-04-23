@@ -1,0 +1,510 @@
+/** Component: Navbar */
+@use './mixins' as *;
+
+$selector-color-mode-toggle-button: 'button[class*="ColorModeToggle"]';
+$selector-color-mode-toggle-wrapper: 'div[class*="ColorModeToggle"]';
+
+:root body {
+  --docsearch-searchbox-background: var(--strapi-neutral-150);
+  --docsearch-searchbox-shadow: 0 0 0 2px var(--strapi-primary-600);
+  --docsearch-muted-color: var(--strapi-neutral-400);
+  --docsearch-text-color: var(--strapi-neutral-400);
+
+  --ifm-navbar-height: 56px;
+  --ifm-navbar-padding-vertical: var(--strapi-spacing-1);
+  --ifm-navbar-padding-horizontal: var(--strapi-spacing-2);
+  --ifm-navbar-shadow: 0 1px 0 0 var(--strapi-neutral-150);
+}
+
+.navbar {
+  --custom-navbar-brand-mr: 0;
+  --custom-navbar-icon-color: var(--strapi-neutral-500);
+  --custom-navbar-icon-button-size: 36px;
+  --custom-navbar-icon-button-hover-background: var(--strapi-neutral-100);
+  --custom-navbar-items-font-size: var(--strapi-font-size-sm);
+  --custom-navbar-items-gap: var(--strapi-spacing-3);
+  // --custom-navbar-logo-img-height: 25px;
+  --custom-navbar-logo-img-width: 55px;  // logo sieze
+  --custom-navbar-toggle-mr: var(--strapi-spacing-1);
+  --custom-navbar-transition: all 0.2s ease;
+
+  --ifm-navbar-padding-horizontal: var(--custom-navbar-items-gap);
+
+  transition: var(--custom-navbar-transition);
+
+  &__items {
+    display: flex;
+    gap: var(--strapi-spacing-2);
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__items:not(.navbar__items--right) {
+    width: calc(100%);
+    /**
+     * Optical adjustments to have CMS and Cloud items centered
+     * Docusaurus DOM is weird so we can't rely on classical centering techniques
+     */
+    margin-left: calc(194px + 20px); // 194px = logo size
+    margin-right: 64px;
+    /**
+     * Use these if we remove the GitHub logo from navbar
+     */
+    // margin-left: calc(194px + 20px); // 194px = logo size
+    // margin-right: 170px;
+  }
+
+  &__item {
+    color: var(--strapi-neutral-600);
+  }
+
+  &__item i {
+    margin-right: 4px;
+    color: #8E8EA9;
+  }
+
+  &__brand,
+  &__logo {
+    height: auto;
+    line-height: 0;
+  }
+
+  &__brand {
+    margin-right: auto;
+    position: absolute;
+    left: 20px;
+  }
+
+  &__items::before, &__items::after {
+    content: '';
+    flex: 1;
+  }
+
+  &__toggle {
+    margin-right: var(--custom-navbar-toggle-mr);
+  }
+
+  &__logo {
+    margin-right: 0;
+
+    img {
+      height: var(--custom-navbar-logo-img-height);
+      width: var(--custom-navbar-logo-img-width);
+    }
+  }
+
+  &__link {
+    font-size: var(--custom-navbar-items-font-size);
+    border-radius: 4px;
+    border: solid 1px transparent;
+    i {
+      position: relative;
+      top: 1px;
+    }
+
+    &--active {
+      color: var(--strapi-primary-600);
+      background-color: var(--strapi-primary-100);
+
+      i {
+        color: var(--strapi-primary-600);
+      }
+    }
+
+    &:not(.navbar__link--active) {
+      --ifm-navbar-link-hover-color: var(--strapi-neutral-800);
+
+      &:hover {
+        color: var(--strapi-neutral-900) !important;
+        background-color: var(--strapi-neutral-100);
+      }
+    }
+  }
+
+  &__link svg,
+  .navbar-sidebar__close,
+  #{$selector-color-mode-toggle-button} {
+    color: var(--custom-navbar-icon-color);
+  }
+
+  .navbar-sidebar__close,
+  #{$selector-color-mode-toggle-button} {
+    --ifm-color-emphasis-600: currentColor;
+
+    background: transparent;
+    // border-radius: 50%;
+
+    &:hover {
+      background: var(--custom-navbar-icon-button-hover-background);
+    }
+  }
+
+  .navbar__toggle,
+  .navbar-sidebar__close,
+  #{$selector-color-mode-toggle-wrapper} {
+    align-items: center;
+    justify-content: center;
+    height: var(--custom-navbar-icon-button-size);
+    width: var(--custom-navbar-icon-button-size);
+  }
+
+  [class*="navbarSearchContainer"] {
+    display: none;
+  }
+
+  button[class*="olorModeToggle"], // not using c or C because they differ in production vs. local dev 😅
+  button[class*="toggleButton"] {
+    background: none !important;
+    position: relative;
+    right: -4px;
+    top: 2px;
+
+    // Use 'moon' icon in dark mode
+    &::after {
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='rgb(142,142,169)' viewBox='0 0 256 256'%3E%3Cpath d='M235.54,150.21a104.84,104.84,0,0,1-37,52.91A104,104,0,0,1,32,120,103.09,103.09,0,0,1,52.88,57.48a104.84,104.84,0,0,1,52.91-37,8,8,0,0,1,10,10,88.08,88.08,0,0,0,109.8,109.8,8,8,0,0,1,10,10Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+    &:hover::after {
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='rgb(33,33,52)' viewBox='0 0 256 256'%3E%3Cpath d='M235.54,150.21a104.84,104.84,0,0,1-37,52.91A104,104,0,0,1,32,120,103.09,103.09,0,0,1,52.88,57.48a104.84,104.84,0,0,1,52.91-37,8,8,0,0,1,10,10,88.08,88.08,0,0,0,109.8,109.8,8,8,0,0,1,10,10Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+    svg {
+      display: none
+    }
+  }
+
+  button[class*="ColorModeToggle"] {
+    border-radius: 4px;
+    top: 0;
+
+    &:hover {
+      background-color: var(--strapi-neutral-100) !important;
+    }
+
+    &::after {
+      position: absolute;
+      top: 11px;
+    }
+  }
+}
+
+/** Responsive */
+@include small-up {
+  .navbar {
+    .DocSearch-Button {
+      --custom-navbar-icon-button-hover-background: var(--strapi-neutral-0);
+
+      color: var(--strapi-neutral-400);
+      border: var(--strapi-input-border);
+      border-radius: 6px;
+      font-family: var(--ifm-font-family-base);
+      height: 40px;
+      padding: 0 var(--strapi-spacing-3);
+      background-color: var(--custom-navbar-icon-button-hover-background);
+
+      svg path {
+        stroke-width: 2px;
+      }
+
+      &-Container {
+        gap:  var(--strapi-spacing-1);
+      }
+
+      &-Placeholder,
+      &-Key {
+        font-size: var(--custom-navbar-items-font-size);
+      }
+
+      &-Key {
+        margin: 0;
+        padding: 0;
+        width: 14px;
+        height: 14px;
+        background: none;
+        border: none;
+        box-shadow: none;
+        font-weight: 600;
+        line-height: 0;
+        align-items: center;
+        justify-content: center;
+
+        &:first-of-type {
+          font-size: 150%;
+        }
+      }
+
+      &-Keys {
+        padding: 2px 0 0;
+        justify-content: end;
+      }
+    }
+  }
+}
+
+/** Responsive */
+@include medium-up {
+  .navbar {
+    --custom-navbar-brand-mr: 75px;
+    --custom-navbar-items-gap: var(--strapi-spacing-4);
+    --custom-navbar-search-button-width: 266px;
+
+    --ifm-navbar-padding-horizontal: var(--custom-navbar-items-gap);
+    min-height: 64px;
+  }
+}
+
+/**
+ * Responsive: Mobile
+ */
+@include medium-down {
+
+  nav.navbar:not(.navbar-sidebar--show) {
+    div.navbar-sidebar {
+      transform: translateX(100vw);
+    }
+  }
+  nav.navbar-sidebar--show {
+    div.navbar-sidebar {
+      transform: translateX(calc(100vw - var(--navbar-sidebar-max-width)));
+    }
+  }
+  .navbar-sidebar {
+    --navbar-sidebar-mobile-width: 100%;
+    width: var(--navbar-sidebar-mobile-width);
+    --navbar-sidebar-max-width: 280px;
+    max-width: var(--navbar-sidebar-max-width);
+
+    .mobile--search {
+      position: absolute;
+      top: 20px;
+    }
+
+    .my-custom-search-bar {
+      position: relative;
+      top: 10px;
+      left: 20px;
+      width: calc(100% - 46px);
+      min-width: calc(100% - 46px);
+      margin-top: 12px;
+
+      .DocSearch-Button-Placeholder,
+      .kapa-widget-button-text {
+        display: block;
+      }
+    }
+
+    &__item.menu {
+      padding-left: 10px;
+
+      &:nth-of-type(2) {
+        max-width: calc(var(--navbar-sidebar-max-width) - 16px);
+        width: 100%;
+      }
+    }
+
+    .theme-doc-sidebar-item-category-level-1,
+    .theme-doc-sidebar-item-category-level-2,
+    .theme-doc-sidebar-item-category-level-3,
+    .theme-doc-sidebar-item-category-level-4 {
+      padding-right: 0 !important;
+    }
+
+    /**
+     * Prevents being able to go back to the first-level main menu
+     * which would display the CMS and Cloud buttons
+     */
+    &__back {
+      display: none;
+    }
+  }
+
+  .navbar {
+    &__toggle, // local selector
+    button[class*="toggleButton"], // production selector
+    &-sidebar__close {
+      position: absolute;
+      right: 16px;
+      height: 32px !important;
+      width: 32px !important;
+      padding: 0;
+      border: solid 1px var(--strapi-neutral-200);
+      border-radius: 4px !important;
+
+      &::after {
+        font-family: "Phosphor";
+        font-size: 16px;
+      }
+
+      svg {
+        display: none;
+      }
+    }
+
+    &-sidebar__brand {
+      box-shadow: none;
+    }
+
+    &__toggle::after {
+      content: '\E2F0';
+    }
+    &-sidebar__close::after {
+      content: '\E4F6';
+    }
+
+    [class*="ColorModeToggle"] { // local dev selector
+      position: absolute;
+      top: 0;
+      right: -8px !important;
+    }
+    button[class*="toggleButton"] { // production selector
+      right: 60px !important;
+      top: 12px;
+      border: none;
+    }
+
+    .custom-mobile-navbar {
+      --custom-mobile-navbar-list-padding: 16px;
+      --custom-mobile-navbar-list-gap: 12px;
+      --custom-mobile-navbar-width: 100%;
+
+      list-style-type: none;
+      display: flex;
+      padding: 0 var(--custom-mobile-navbar-list-padding);
+      justify-content: space-between;
+
+      &__item {
+        min-width: calc((var(--custom-mobile-navbar-width)  / 2) - var(--custom-mobile-navbar-list-gap) / 2);
+        text-align: center;
+        border-radius: 4px;
+        padding: 4px 8px;
+
+        &-link {
+          text-decoration: none;
+          color: var(--strapi-neutral-600);
+          font-size: var(--strapi-font-size-sm);
+          line-height: var(--strapi-line-height-sm);
+          font-weight: 500;
+
+          i {
+            margin-right: 8px;
+          }
+        }
+
+        &:hover {
+          background-color: var(--strapi-neutral-100);
+        }
+      }
+
+      &__separator {
+        border-bottom: solid 1px var(--strapi-neutral-200);
+        width: 100%;
+      }
+    }
+
+    &--fixed-top {
+      position: relative;
+    }
+  }
+
+  /**
+   * Highlights the current custom navbar link
+   * since we can't rely on --active classes
+   * since our nav is fully custom
+   */
+  html[class*="docs-doc-id-cms"],
+  html[class*="docs-doc-id-cloud"] {
+    .navbar .custom-mobile-navbar__item:has(.mobile-navbar__cms-link) {
+      background-color: var(--strapi-neutral-100);
+
+      .custom-mobile-navbar__item-link {
+        color: var(--strapi-primary-600);
+      }
+    }
+  }
+  html[class*="docs-doc-id-cloud"] {
+    .navbar .custom-mobile-navbar__item:has(.mobile-navbar__cloud-link) {
+      background-color: var(--strapi-neutral-100);
+
+      .custom-mobile-navbar__item-link {
+        color: var(--strapi-primary-600);
+      }
+    }
+  }
+
+  /**
+   * Hide first-level navbar items
+   * when on homepage
+   */
+  html[class*="plugin-pages"] {
+    .navbar-sidebar__items {
+      display: none;
+    }
+  }
+}
+
+.navbar {
+  border-bottom: 1px solid var(--strapi-neutral-150);
+  --ifm-navbar-shadow: none;
+}
+
+@include dark {
+  .kapa-widget-button {
+    button {
+      svg {
+        fill: var(--strapi-neutral-800);
+      }
+    }
+  }
+
+  .navbar {
+    border-bottom-color: var(--strapi-neutral-150);
+  }
+
+  .navbar__link {
+    color: var(--strapi-neutral-400);
+
+    &:not(.navbar__link--active):hover {
+      color: var(--strapi-neutral-700) !important;
+      background-color: var(--strapi-neutral-0) !important;
+    
+      i::before {
+        color: var(--strapi-neutral-700);
+      }
+    }
+  }
+
+  .navbar__link--active[href^="/cms/"],
+  .navbar__link--active[href^="/cloud/"] {
+    background-color: var(--strapi-neutral-100);
+    color: var(--strapi-primary-600);
+
+    i::before {
+      color: var(--strapi-primary-600);
+    }
+  }
+
+  .navbar__link:not(.navbar__link--active) {
+    &:hover {
+      background-color: var(--strapi-neutral-100) !important;
+    }
+  }
+
+  // .navbar__link--active[href^="/cloud/"] {
+  //   background-color: var(--strapi-neutral-0);
+  //   color: var(--strapi-secondary-500);
+
+  //   i::before {
+  //     color: var(--strapi-secondary-500);
+  //   }
+  // }
+
+  button[class*="ColorModeToggle"],
+  button[class*="toggleButton"] {
+    // Use sun icon from phosphoricons.com
+    &::after {
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgb(142,142,169)' viewBox='0 0 256 256'%3E%3Cpath d='M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm8,24a64,64,0,1,0,64,64A64.07,64.07,0,0,0,128,64ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+
+    &:hover::after {
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgb(255,255,255)' viewBox='0 0 256 256'%3E%3Cpath d='M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm8,24a64,64,0,1,0,64,64A64.07,64.07,0,0,0,128,64ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+  }
+}
