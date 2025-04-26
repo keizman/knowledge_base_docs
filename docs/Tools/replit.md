@@ -60,3 +60,30 @@ Host *.replit.dev
 
 # replit 使用
 部署服务后官方直接回映射到一个公网地址, 直接在网页访问即可
+
+
+
+
+### 报错
+
+auth, 需要回到 replit 页面执行 push 会提示, 确认即可恢复
+```
+Missing or invalid credentials.
+Error: connect ENOENT /tmp/vscode-git-0a241458ec.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1611:16) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/tmp/vscode-git-0a241458ec.sock'
+}
+Missing or invalid credentials.
+Error: connect ENOENT /tmp/vscode-git-0a241458ec.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1611:16) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/tmp/vscode-git-0a241458ec.sock'
+}
+remote: No anonymous write access.
+fatal: Authentication failed for 'https://github.com/keizman/tmp.git/'
+```

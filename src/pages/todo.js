@@ -372,7 +372,11 @@ const QUICK_ENTRY_TASKS = `
   * support PAY, USDT, Paddel aplly
   * set prices
   * merge master code to local
-  * 子管理员角色扩展
+  * 子管理员角色扩展/仿 openrouter 的平台配置
+  * 想好走什么模式
+  * AIGC News
+  * Technical blogs
+  * 快速翻译
   @progress: 50%
   @due: 2025-04-21
   @priority: High
@@ -391,6 +395,7 @@ const QUICK_ENTRY_TASKS = `
   ready for use
   * ✅ Core functionality
   * ✅ Command parsing
+  * Add lazy mode, use natrural language to excute command then complete task
   @version: 1.0
   @repository: https://github.com/keizman/Ask-Terminal-AI
 

@@ -1,6 +1,3 @@
----
-sidebar_position: 3
----
 
 # Create a Blog Post
 
@@ -25,18 +22,7 @@ authors:
     image_url: https://github.com/slorber.png
 tags: [greetings]
 ---
-
-Congratulations, you have made your first post!
-
-Feel free to play around and edit this post as much as you like.
 ```
-
-A new blog post is now available at [http://localhost:3000/blog/greetings](http://localhost:3000/blog/greetings).
-
-
----
-sidebar_position: 2
----
 
 # Create a Document
 
@@ -49,14 +35,6 @@ Documents are **groups of pages** connected through:
 ## Create your first Doc
 
 Create a Markdown file at `docs/hello.md`:
-
-```md title="docs/hello.md"
-# Hello
-
-This is my **first Docusaurus document**!
-```
-
-A new document is now available at [http://localhost:3000/docs/hello](http://localhost:3000/docs/hello).
 
 ## Configure the Sidebar
 
@@ -124,23 +102,6 @@ export default function MyReactPage() {
 
 A new page is now available at [http://localhost:3000/my-react-page](http://localhost:3000/my-react-page).
 
-## Create your first Markdown Page
-
-Create a file at `src/pages/my-markdown-page.md`:
-
-```mdx title="src/pages/my-markdown-page.md"
-# My Markdown page
-
-This is a Markdown page
-```
-
-A new page is now available at [http://localhost:3000/my-markdown-page](http://localhost:3000/my-markdown-page).
-
-
----
-sidebar_position: 1
----
-
 # Manage Docs Versions
 
 Docusaurus can manage multiple versions of your docs.
@@ -195,9 +156,6 @@ It is possible to edit versioned docs in their respective folder:
 
 
 
----
-sidebar_position: 2
----
 
 # Translate your site
 
@@ -228,21 +186,6 @@ cp docs/intro.md i18n/fr/docusaurus-plugin-content-docs/current/intro.md
 
 Translate `i18n/fr/docusaurus-plugin-content-docs/current/intro.md` in French.
 
-## Start your localized site
-
-Start your site on the French locale:
-
-```bash
-npm run start -- --locale fr
-```
-
-Your localized site is accessible at [http://localhost:3000/fr/](http://localhost:3000/fr/) and the `Getting Started` page is translated.
-
-:::caution
-
-In development, you can only use one locale at a time.
-
-:::
 
 ## Add a Locale Dropdown
 
@@ -266,89 +209,76 @@ export default {
 };
 ```
 
-The locale dropdown now appears in your navbar:
-
-![Locale Dropdown](./img/localeDropdown.png)
-
-## Build your localized site
-
-Build your site for a specific locale:
-
-```bash
-npm run build -- --locale fr
-```
-
-Or build your site to include all the locales at once:
-
-```bash
-npm run build
-```
-
-
-
-
-
-
-
-
-
----
-sidebar_position: 4
----
-
-# Markdown Features
-
-Docusaurus supports **[Markdown](https://daringfireball.net/projects/markdown/syntax)** and a few **additional features**.
 
 ## Front Matter
 
-Markdown documents have metadata at the top called [Front Matter](https://jekyllrb.com/docs/front-matter/):
 
-```text title="my-doc.md"
-// highlight-start
+category json content
+```
+{
+  "position": 2.5,
+  "label": "Tutorial",
+  "collapsible": true,
+  "collapsed": false,
+  "className": "red",
+  "link": {
+    "type": "generated-index",
+    "title": " Tutorialoverview"
+  },
+  "customProps": {
+    "description": "This description can be used in the swizzled DocCard"
+  }
+}
+```
+
+https://docusaurus.io/docs/next/api/plugins/@docusaurus/plugin-content-docs#routeBasePath
+```
+Docs 
 ---
-id: my-doc-id
-title: My document title
-description: My document description
-slug: /my-custom-url
+id: doc-markdown
+title: Docs Markdown Features
+hide_title: false
+hide_table_of_contents: false
+sidebar_label: Markdown
+sidebar_position: 3
+pagination_label: Markdown features
+custom_edit_url: https://github.com/facebook/docusaurus/edit/main/docs/api-doc-markdown.md
+description: How do I find you when I cannot solve this problem
+keywords:
+  - docs
+  - docusaurus
+tags: [docusaurus]
+image: https://i.imgur.com/mErPwqL.png
+slug: /myDoc
+last_update:
+  date: 1/1/2000
+  author: custom author name
 ---
-// highlight-end
 
-## Markdown heading
-
-Markdown text with [links](./hello.md)
 ```
 
-## Links
 
-Regular Markdown links are supported, using url paths or relative file paths.
+```Blogs
+---
+title: Welcome Docusaurus
+authors:
+  - slorber
+  - yangshun
+  - name: Joel Marcey
+    title: Co-creator of Docusaurus 1
+    url: https://github.com/JoelMarcey
+    image_url: https://github.com/JoelMarcey.png
+    socials:
+      x: joelmarcey
+      github: JoelMarcey
+tags: [docusaurus]
+description: This is my first post on Docusaurus.
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
 
-```md
-Let's see how to [Create a page](/create-a-page).
-```
+A Markdown blog post
 
-```md
-Let's see how to [Create a page](./create-a-page.md).
-```
-
-**Result:** Let's see how to [Create a page](./create-a-page.md).
-
-## Images
-
-Regular Markdown images are supported.
-
-You can use absolute paths to reference images in the static directory (`static/img/docusaurus.png`):
-
-```md
-![Docusaurus logo](/img/docusaurus.png)
-```
-
-![Docusaurus logo](/img/docusaurus.png)
-
-You can reference images relative to the current file as well. This is particularly useful to colocate images close to the Markdown files using them:
-
-```md
-![Docusaurus logo](./img/docusaurus.png)
 ```
 
 ## Code Blocks
@@ -369,35 +299,6 @@ function HelloDocusaurus() {
 }
 ```
 
-## Admonitions
-
-Docusaurus has a special syntax to create admonitions and callouts:
-
-```md
-:::tip My tip
-
-Use this awesome feature option
-
-:::
-
-:::danger Take care
-
-This action is dangerous
-
-:::
-```
-
-:::tip My tip
-
-Use this awesome feature option
-
-:::
-
-:::danger Take care
-
-This action is dangerous
-
-:::
 
 ## MDX and React Components
 
@@ -421,10 +322,8 @@ export const Highlight = ({children, color}) => (
 );
 
 This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !
-
 This is <Highlight color="#1877F2">Facebook blue</Highlight> !
 ```
-
 export const Highlight = ({children, color}) => (
   <span
     style={{
@@ -440,7 +339,129 @@ export const Highlight = ({children, color}) => (
     {children}
   </span>
 );
-
 This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !
-
 This is <Highlight color="#1877F2">Facebook blue</Highlight> !
+
+
+----
+
+
+# Docusaurus Documentation Project Information
+
+## Project Overview
+这是一个个人知识库项目, 用于记录所学知识以及发布感悟 blogs, 基于
+
+## Project Structure
+The project follows the standard Docusaurus structure:
+- `/docs`: Contains all documentation markdown files
+- `/blog`: Contains blog posts
+- `/src`: Contains React components and custom pages
+- `/static`: Contains static assets like images
+
+
+## Configuration
+The site is configured through `docusaurus.config.ts` with the following main settings:
+- Base URL: `https://knowledge.llmproai.xyz`
+- Default locale: English with additional locales for Chinese and Portuguese
+- Theme customization via `src/css/custom.css` (current theme uses light blue colors)
+- Navigation structure defined in the themeConfig section
+
+## Development Workflow
+Development commands are available in `package.json`:
+- `npm start`: Start the development server
+
+## Documentation Structure
+The documentation follows a sidebar structure automatically generated from the folder structure in the `/docs` directory, with the main entry point being `docs/intro.md`.
+
+## Media and Assets
+Static assets are stored in the `/static` directory, with configuration in `.gitten/config.json` specifying `static` as the media folder.
+
+## Current Status
+The documentation is in active development with several example pages and translations already in place. The content about the GPT API Proxy service is being expanded, particularly in the "API Docs" section.
+
+## 编辑须知 (Guidelines for AI Editors)
+
+### Markdown 语法指南 (Markdown Syntax Guidelines)
+1. **基本语法** (Basic Syntax):
+    markdown 语法
+
+2. **Docusaurus 特殊语法** (Docusaurus-Specific Syntax):
+   - 前端元数据 (Front Matter): 
+     ```
+     ---
+     sidebar_position: 1
+     title: 页面标题
+     description: 页面描述
+     ---
+     ```
+   - Admonitions (提示框):
+     ```
+     :::tip 提示标题
+     提示内容
+     :::
+
+     :::warning 警告标题
+     警告内容
+     :::
+
+     :::danger 危险标题
+     危险内容
+     :::
+     ```
+   
+
+
+4. **MDX 组件** (MDX Components):
+   - 可以在 Markdown 中使用 React 组件
+   - 组件定义使用标准 JSX 语法
+   - 示例:
+     ```jsx
+     export const Highlight = ({children, color}) => (
+       <span style={{backgroundColor: color}}>
+         {children}
+       </span>
+     );
+
+     <Highlight color="#1877F2">高亮文本</Highlight>
+     ```
+
+### 多语言支持指南 (Multilingual Guidelines), attention: 只有指定翻译任务时才参考此指南
+1. **创建翻译文件**:
+   - 新文档应优先创建英文版本
+   - 翻译文件位于 `i18n/zh-Hans/` 和 `i18n/pt-BR/` 目录
+
+2. **翻译协作**:
+   - 确保专业术语在所有语言中保持一致
+   - 保留原文中的代码示例，仅翻译注释
+   - 可使用 `npm run write-translations` 生成待翻译文件
+
+### 图片和资源 (Images and Assets)
+1. **图片存放**:
+   - 将图片放置在 `/static/img/` 目录下
+   - 在 Markdown 中引用: `![描述](/img/图片名.png)`
+   
+2. **组织结构**:
+   - 为特定文档创建子文件夹
+   - 使用有意义的文件名
+
+### 文档质量标准 (Documentation Quality Standards)
+1. **内容要求**:
+   - 文档应清晰、简洁、准确
+   - 示例代码必须能够正常运行
+   - 技术描述应准确无误
+   - 解释复杂概念时提供图表或类比
+
+2. **格式标准**:
+   - 一致的标题大小写
+   - 一致的代码风格
+   - 恰当的段落长度 (避免过长段落)
+   - 合理使用列表和表格组织信息
+
+### 编辑限制 (Editing Restrictions)
+
+**不能做的事** (What You Cannot Do):
+- 删除现有重要内容
+- 添加不准确的技术信息
+- 添加与项目无关的内容
+- 生成与文档主题无关的营销内容
+- 更改已建立的术语一致性
