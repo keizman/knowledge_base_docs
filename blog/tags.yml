@@ -17,3 +17,90 @@ hola:
   label: Hola
   permalink: /hola
   description: Hola tag description
+
+AI:
+  label: AI
+  permalink: /ai
+  description: AI tag description
+
+MCP:
+  label: MCP
+  permalink: /mcp
+  description: MCP tag description
+
+Technical:
+  label: Technical
+  permalink: /technical
+  description: Technical tag description
+
+Code:
+  label: Code
+  permalink: /code
+  description: Code tag description
+
+Git:
+  label: Git
+  permalink: /git
+  description: Git tag description
+
+Life:
+  label: Life
+  permalink: /life
+  description: Life tag description
+
+Markdown:
+  label: Markdown
+  permalink: /markdown
+  description: Markdown tag description
+
+Net:
+  label: Net
+  permalink: /net
+  description: Net tag description
+
+OnCompany:
+  label: OnCompany
+  permalink: /oncompany
+  description: OnCompany tag description
+
+Project:
+  label: Project
+  permalink: /project
+  description: Project tag description
+
+Self Tools:
+  label: Self Tools
+  permalink: /self-tools
+  description: Self Tools tag description
+
+Tools:
+  label: Tools
+  permalink: /tools
+  description: Tools tag description
+
+Unclass:
+  label: Unclass
+  permalink: /unclass
+  description: Unclass tag description
+
+
+
+Learn:
+  label: Learn
+  permalink: /learn
+  description: Learn tag description
+
+FrontEND:
+  label: FrontEND
+  permalink: /frontend
+  description: FrontEND tag description
+
+Go:
+  label: Go
+  permalink: /go
+  description: Go tag description
+
+Python:
+  label: Python
+  permalink: /python
+  description: Python tag description

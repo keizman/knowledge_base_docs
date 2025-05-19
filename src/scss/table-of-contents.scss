@@ -65,6 +65,24 @@
   > li > ul > li > ul > li .table-of-contents__link::before {
     --custom-table-of-contents-link-active-before-left: -52px;
   }
+
+  ul {
+    margin-left: 0;
+    
+    // Style for nested lists - increase indentation for each level
+    ul {
+      margin-left: 16px; // Increase from 12px to 16px for better visual separation
+      
+      // Add more indentation for deeper nesting levels
+      ul {
+        margin-left: 16px; // Third level indentation
+        
+        ul {
+          margin-left: 16px; // Fourth level indentation
+        }
+      }
+    }
+  }
 }
 
 /**
