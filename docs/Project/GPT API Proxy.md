@@ -47,8 +47,10 @@ Email 推送大事件, docs 更新所有, 固有化指导
 <!-- truncate -->
 
 ### Analytics
+```
 https://clarity.microsoft.com/
 https://analytics.google.com/
+```
 
 侧重点不同, 可以都添加使用, 之后更新具体区别,
 只需要将 code 放在 index 里
@@ -976,7 +978,7 @@ brevo 问题SMTP auth failed, 查了半天发现提供的 SMTP 地址是错的, 
 
 
 
-
+```
 我的网站主要对 巴西 日本, ... 进行服务, 我经常看到有优选 IP 方案, 我需要使用这种方案吗, 为什么, 当我开启小黄云后能达到我所服务地区访问加速吗, 如果更加优化
 
 Show thinking
@@ -1052,3 +1054,5 @@ Show thinking
 1. For a website targeting both Brazil and Japan, would deploying origin servers in both regions (e.g., one in São Paulo, one in Tokyo) and using Cloudflare Load Balancer provide better performance than a single origin with Argo Smart Routing? What are the cost and complexity differences? (对于一个同时面向巴西和日本的网站，在两地都部署源服务器（例如，圣保罗一台，东京一台）并使用 Cloudflare Load Balancer，是否会比单一源站配合 Argo Smart Routing 提供更好的性能？成本和复杂性有何差异？)
 2. How can I use Cloudflare Analytics and real user monitoring (RUM) data to precisely measure the performance impact of enabling features like Argo or Tiered Caching for users specifically in Brazil and Japan? (我如何利用 Cloudflare Analytics 和真实用户监控（RUM）数据，来精确衡量启用 Argo 或 Tiered Caching 等功能对巴西和日本特定用户的性能影响？)
 3. Are there specific Cloudflare firewall rules (WAF) or rate limiting settings that are particularly recommended for APIs or websites serving traffic from Brazil and Japan, considering common traffic patterns or potential threats from these regions? (是否有特别推荐的 Cloudflare 防火墙规则（WAF）或速率限制设置，适用于为来自巴西和日本的流量提供服务的 API 或网站，考虑到这些地区常见的流量模式或潜在威胁？)
+
+```
