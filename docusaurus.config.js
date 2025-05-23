@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
+  title: 'Zard knowledgebase',
   // tagline: 'Dinosaurs are cool',
   // favicon: 'img/favicon.ico',
 
@@ -38,21 +38,25 @@ const config = {
   //   locales: ['en'],
   // },
   plugins: [
-    // [
-    //   '@easyops-cn/docusaurus-search-local',
-    //   {
-    //     // 配置选项
-    //     hashed: true,
-    //     docsRouteBasePath: '/',
-    //     searchResultLimits: 8,
-    //     // 支持中文搜索
-    //     language: ["zh", "en"],
-    //     // 配置索引哪些内容
-    //     indexDocs: true,
-    //     indexBlog: true,
-    //     indexPages: true,
-    //   }
-    // ],
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        // 配置选项
+        hashed: true,
+        docsRouteBasePath: '/',
+        searchResultLimits: 8,
+        // 支持中文搜索
+        language: ["zh", "en"],
+        // 配置索引哪些内容
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+        // 添加调试信息
+        // debug: true,
+        // 在哪里显示搜索框
+        searchBarPosition: 'right'
+      }
+    ],
     'docusaurus-plugin-sass',
   ],
 
@@ -124,6 +128,14 @@ const config = {
         },
       }),
     ],
+  ],
+
+  // 添加自定义脚本以修复搜索框位置
+  scripts: [
+    {
+      src: '/js/local-search-fix.js',
+      async: true,
+    },
   ],
 
   themeConfig:
