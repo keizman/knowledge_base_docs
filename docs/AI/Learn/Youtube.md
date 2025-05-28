@@ -1,4 +1,4 @@
-### Post-Traing and frogetting(第六讲)
+## Post-Traing and frogetting(第六讲)
 [video](https://www.youtube.com/watch?v=Z6b5-77EfGk&t=575s)  
 
 [PPT ](https://docs.google.com/presentation/d/129jFUXCPekD2Qoaq6H0Ntasm0GUiK8_X/edit#slide=id.p5)
@@ -23,3 +23,18 @@
 ### RL Based post-training(最后一个阶段)
 其推测能防止遗忘
 
+
+
+## [(第十二講)語言模型如何學會說話 — 概述語音語言模型發展歷程](https://www.youtube.com/watch?v=gkAyqoQkOSk)
+
+文字训练vs语音模型
+相较于文字语言模型, 更多的信息(情绪...)，更多因素(打断)
+
+如何检查语音 Tokenization 是否有效，直接训练 ，用decoder解出的是有效音频 越接近越好
+
+以上是 TTS 模型训练
+
+问题: 语音语言模型更难训练,  pretrain 之后的模型说胡话, 产出的不是有效语句单位
+原因: 文字语言数据太少, 想想 GPT 十多 T 的文本数据
+**快进到选用 文字语言模型作为 foundation model**
+同时生产文字和语言token 块
