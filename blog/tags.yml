@@ -3,6 +3,11 @@ facebook:
   permalink: /facebook
   description: Facebook tag description
 
+resolution:
+  label: Resolution
+  permalink: /resolution
+  description: resolution tag description
+
 hello:
   label: Hello
   permalink: /hello
