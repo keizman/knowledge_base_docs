@@ -1,5 +1,5 @@
 ---
-slug: api-proxy
+slug: gpt-api-proxy
 ---
 
 
@@ -14,6 +14,8 @@ slug: api-proxy
 目前想到的方式是 copy different 到 LLM 进行处理, 再想想有没有更快捷的方式, 比如快速合并
 
 
+语言:
+en.json  hi.json  ja.json  pt_BR.json  zh.json
 
 ### Feature
 
@@ -439,6 +441,32 @@ act as a profession translate help me translate english to japnese 你的翻译�
 10. 使用专业图标库例如 Font Awesome或Material Icons(通过CDN引入)
 11. 避免使用emoji作为主要图标
 12. 不要省略内容要点
+
+
+
+merge latest project code to currrent code.  under the change list, -: is del line, + is add line ---for spilit commit, U need confirm this change's Stakes, My code may has different with latest project, any conflict, please refer to my code, report all merge action to changelist.md,keep the language in english, Dont Unauthorized modification native code comment report it at changelist or tell me. mention: if encounter "new-api" replace it to "GPT API Proxy" name
+
+changelist.md  file format:
+
+comment: fix: claude function calling type(change keyword my provided or U summaries)
+source change date: f
+change date: add this code date
+..etc
+
+following is chnage code------------
+
+
+
+
+
+
+https://github.com/QuantumNous/new-api/commits/main?since=2025-03-20&until=2025-03-31
+
+
+
+
+
+
 
 ```
 
