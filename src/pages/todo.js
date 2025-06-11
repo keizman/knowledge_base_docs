@@ -376,15 +376,15 @@ const QUICK_ENTRY_TASKS = `
   * 想好走什么模式
   * AIGC News
   * Technical blogs
-  * 快速翻译: 1.Site 2.Docs 
+  * 快速翻译：1.Site 2.Docs 
   * ✅ Determine update program effect for payment, 变更到写心得支付方式时 
   * memory cache and redis cache
   * aff_code
   * ✅ user's registered region
   * ✅ 已向原始 register 对齐-google register method completion
-  * ✅ 本身已实现, 咱不更改/api/register /api/login autoban IP, 可配置, 默认 1小时30次, 封禁时间 3 小时, Tier 1. /api/* 是另一个独立配置, autoban IP, 可配置, 默认 1小时300次, 封禁时间 1小时(redis 存储被 ban 信息) /v1* 根据状态码 ban ip, 如果 同 IP 连续100 次 状态码为余额不足时, 默认封禁 1 小时. 这样可以做到, 如果 200 状态码的不增加数据, 不影响用户的请求性能
-  * 充值方式: USDT, Paddle, Stripe, Paypal, crypto, creem
-  * Playgroud - RAG button: 开启对 当前 site 问答功能, 方式为提前生成, 问答时一次性加载. 生成方式: 对布局做总结, 对文档做总结后的剔除, 要完全避免泄露隐私信息.  --猜测用户问题, 提前书写好回答
+  * ✅ 本身已实现，咱不更改/api/register /api/login autoban IP, 可配置，默认 1 小时 30 次，封禁时间 3 小时，Tier 1. /api/* 是另一个独立配置，autoban IP, 可配置，默认 1 小时 300 次，封禁时间 1 小时 (redis 存储被 ban 信息) /v1* 根据状态码 ban ip, 如果 同 IP 连续 100 次 状态码为余额不足时，默认封禁 1 小时。这样可以做到，如果 200 状态码的不增加数据，不影响用户的请求性能
+  * 充值方式：USDT, Paddle, Stripe, Paypal, crypto, creem
+  * Playgroud - RAG button: 开启对 当前 site 问答功能，方式为提前生成，问答时一次性加载。生成方式：对布局做总结，对文档做总结后的剔除，要完全避免泄露隐私信息。 --猜测用户问题，提前书写好回答
   * add LLM.txt
   * CF Settings
   * Data analysis
@@ -431,6 +431,11 @@ const QUICK_ENTRY_TASKS = `
   * GPT-SoVITS-WebUI
   * https://x.com/karminski3/status/1914106813206913437 偏向虚拟人
 
+## Testcases excuter power by LLM, 
+- [P] Testcases excuter power by LLM, 
+  * 📝 Design architecture
+  @version: 1.0
+  @repository:
 
 ## Wechat Mini Program
 - [P] Wechat Mini Program for AI queries
