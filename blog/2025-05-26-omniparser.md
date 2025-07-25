@@ -8,6 +8,15 @@ tags:
   - resolution
 ---
 
+**微调步骤:** 
+1.收集素材
+2.生成为训练数据, 默认 `training_data`
+3.校准 manual_correction.csv 为你希望的数据
+4.通过脚本将校准数据应用到文件, 默认在 florence_data.json 
+5.随机删除一部分旧数据, 保持比例在 20% 旧数据: 80% 新数据(手动修改的数据)
+6.如果数据量太少, 希望进行数据增强, 参考 TRAINING_GUIDE 文件, 设置倍率进行增加多倍的数据
+7.开始训练 florence2 模型吧. YOLO 目前使用的大概是 V11, 官方调教的还是比较好的, 目前看没有微调的必要, 努力的方向应该是把 PaddleOCR 和 YOLO detect 的合作关系搞好, 甚至在文本不多的情况关闭 PaddleOCR 获取更好的提取效果
+微调的参数可以使用默认值, 数据量多的情况需要减少 lr, batch_size, 目前 22G 内存开 4 个batch 没压力, 感觉 24G 内存的可以从 8 个开试了
 
 
 ### 解决 flash_attn 安装慢, 安装后无法启动问题
@@ -43,7 +52,7 @@ YOLO and Florence2 model
 
 
 ```
-结论, 经过finetune 的 florence model 输出混乱, 请你推测原因是什么, 
+结论, 经过finetune 的 florence model 输出混乱
 
 native
 Element 60: {'type': 'icon', 'bbox': [0.9891748428344727, 0.05476871505379677, 1.0, 0.1757570505142212], 'interactivity': True, 'content': 'M0,0L9,0 4.5,5z', 'source': 'box_yolo_content_yolo'}
@@ -57,7 +66,7 @@ Element 62: {'type': 'icon', 'bbox': [0.9573381543159485, 0.6605868339538574, 0.
 
 ```
 
-原因是训练了线上的模型, 
+原因是保存的模型是 processor , 而不是 icon_captain model, 若要有效识别, 需要对比文件大小
 
 参数 
 lr=1e-7, epochs=7, lr=1e-5
@@ -82,15 +91,7 @@ Element 45: {'type': 'icon', 'bbox': [0.9391891360282898, 0.07831234484910965, 0
 ```
 
 
-**步骤:** 
-1.收集素材
-2.生成为训练数据, 默认 `training_data`
-3.校准 manual_correction.csv 为你希望的数据
-4.通过脚本将校准数据应用到文件, 默认在 florence_data.json 
-5.随机删除一部分旧数据, 保持比例在 20% 旧数据: 80% 新数据(手动修改的数据)
-6.如果数据量太少, 希望进行数据增强, 参考 TRAINING_GUIDE 文件, 设置倍率进行增加多倍的数据
-7.开始训练 florence2 模型吧. YOLO 目前使用的大概是 V11, 官方调教的还是比较好的, 目前看没有微调的必要, 努力的方向应该是把 PaddleOCR 和 YOLO detect 的合作关系搞好, 甚至在文本不多的情况关闭 PaddleOCR 获取更好的提取效果
-微调的参数可以使用默认值, 数据量多的情况需要减少 lr, batch_size, 目前 22G 内存开 4 个batch 没压力, 感觉 24G 内存的可以从 8 个开试了
+
 
 
 
@@ -191,4 +192,6 @@ RuntimeError: Input type (c10::Half) and bias type (float) should be the same
 ### update
 尝试了 `lora_dropout = 0` 发现结果相同, 依旧那个图标没有成功识别, 其它正常识别, 怀疑数据问题, 尝试仅增加手动矫正的数据, 多些倍数, 应用阶段保留 50% , 增强阶段增加 4 倍. 最终比例大约为 8(矫正数据):2(原始数据)
 
-发现 lora train 时 val dataset 直接从sample 的数据里分割出 20%, 可能时因为这样导致的 train data 缺失那个 icon 的资料而无法识别, 改进code: val dataset 打乱数据后随机选择, 
+发现 lora train 时 val dataset 直接从sample 的数据里分割出 20%, 可能时因为这样导致的 train data 缺失那个 icon 的资料而无法识别, 改进code: val dataset 打乱数据后随机选择---原因确认
+
+目前尝试后确实 mutiplayer 为 5 或 4 效果最好, 某一组 loss 非常低, 且`Fold 3: 0.0488 (350 train, 48 val)` 经验证后也确实能识别所有标注的内容. 

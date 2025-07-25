@@ -9,6 +9,76 @@ clash relay 规则不支持 hysteria2
 :::
 
 
+
+### 利用 clash rule 进行 DNS 劫持后 reject 流量的精细化控制
+
+dns-hijack any 53 劫持所有 DNS 流量 到本地 dns , 实现了 访问内网的能力, 这个时候如果想测试`域名被屏蔽的场景: 大概是包直接丢掉, 没有收到任何响应包就认为是屏蔽` 而 REJECT 正是这种, 会把发的包全部丢掉, 自然收不到响应. 以下有两种方式
+- 方式1:  使用 Hosts 指向一个不可访问的地址, 自然收不到响应
+- 方式2: 使用 rule REJECT, 但如果进行了 DNS 劫持, 他不会再走 rule, 与当前配置文件冲突, 后来发现如果配置这个域名到 nameserver-policy 就会走 rule , 此时能被正常的匹配策略并 DROP 掉, 达成目的. 
+```
+    #  nameserver-policy: # 使用这个 会让 rule reject生效,
+    # '+.twer.jrzcglkih.com': '192.168.1.1'
+```
+
+
+**下一步: 尝试 tunnel 可能也是个可行方案**
+https://wiki.metacubex.one/en/config/tunnels/#tunnel
+```
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: debug
+ipv6: false
+
+
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-detect-interface: true
+
+proxies:
+  - {"name":"USA-01", "type":"ss", "server":"test-server", "port":56051, "cipher":"chacha20-ietf-poly1305", "password":"123", "udp":true}
+
+hosts:
+  #  '+.twer.jrzcglkih.com': '192.168.31.1'
+  #'+.bgdr.uypjockxg.com': '192.168.31.1'
+  #'+.htef.zfdoynpie.com': '192.168.31.1'
+    #'+.yref.lfomqzjri.com': '192.168.31.1'
+    #'+.dcs.xifhzu.com': '192.168.31.1'
+    #'+.dcs.putwbe.com': '192.168.31.1'
+# ==> 3. 代理组 (Proxy Groups)
+proxy-groups:
+  - name: "PROXY"
+    type: select
+    proxies:
+      # - "My-Proxy-Server" # 如果有代理节点，在这里引用
+      - "DIRECT"
+dns:
+  enable: true
+  # [关键修改] 使用 redir-host 模式而非 fake-ip
+  enhanced-mode: redir-host
+    #  nameserver-policy: # 使用这个 会让 rule reject生效,
+    # '+.twer.jrzcglkih.com': '192.168.1.1'
+  nameserver:
+    - 10.8.24.67
+      #    - 10.8.24.65
+
+  default-nameserver:
+    - 10.8.24.67
+  cache:
+      enable: false
+
+rules:
+  - DOMAIN-SUFFIX,fsecgnjhr.com,DIRECT
+  - IP-CIDR,223.5.5.5/32,REJECT
+  - MATCH,PROXY
+
+```
+
 ### 透明代理
 
 ### socks5
@@ -16,6 +86,16 @@ clash relay 规则不支持 hysteria2
 
 
 # openclash
+**组合:  Android 开启 dns 劫持, 路由层也开启 openclash fakeip 模式的流量问题**
+`Android 开启 dns 劫持 的目的简述为进入内网`, 而 openclash fakeip 模式会阻拦这一过程, 经过不断尝试使用以下策略来解决
+- 1.旁路由 openclash 升级到 0.46.* 具备了 DNS 防火墙劫持功能, 可自定义设置哪些 IP.MAC 绕过openclash, 目前尝试的只有`黑名单白名单模式生效, 不确定原因`, 此时 fake-ip 模式下这个设备访问任意地址都不会被代理
+- 2.虽然不被代理了但如果此时在某些设备开启 clash 希望通过 dns 劫持进入内网时发现还是无法进入, 此时需要添加 iptables , 在 nat 表 return 这个 dns 的流量, 这时访问就正常了
+`iptables -t nat -D PREROUTING -d 10.8.24.0/24 -j RETURN`
+
+其实在之前的版本直接使用 iptables + clash 启用 rule 是能进入内网的, 但换了一个设备后请求莫名跑到线上, 而又因为 apk 升级版本 日志输出很难看, 又不好定位
+
+
+## 探究为什么 mihomo 不支持 mode: script
 
 
 
