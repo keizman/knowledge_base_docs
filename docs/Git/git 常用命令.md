@@ -22,6 +22,26 @@ git revert --no-edit HEAD
 ```
 
 
+放弃最新的几笔提交
+
+```
+切换到 `main` 分支：**
+    
+    git checkout main
+
+    
+执行硬重置: 使用 `git reset --hard` 命令将 `main` 分支强制重置到您提供的提交 ID。请务必确认您输入的提交 ID 是正确的。
+
+    git reset --hard b2052669923f06028b731b532ba9d8406abc2d36
+
+  
+3. **如果已经推送到远程仓库，需要强制推送：** 如果 `main` 分支的这些“最新提交”已经推送到了远程仓库，那么您还需要强制推送才能更新远程分支。
+    
+    git push origin main --force
+ 
+```
+
+
 ### 合并分支
 
 

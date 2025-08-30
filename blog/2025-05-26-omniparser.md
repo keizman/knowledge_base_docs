@@ -1,6 +1,6 @@
 ---
 slug: omniparser
-title: 安装 omniparser
+title: Omniparser
 authors:
   - Zard
 tags:
@@ -19,36 +19,12 @@ tags:
 微调的参数可以使用默认值, 数据量多的情况需要减少 lr, batch_size, 目前 22G 内存开 4 个batch 没压力, 感觉 24G 内存的可以从 8 个开试了
 
 
-### 解决 flash_attn 安装慢, 安装后无法启动问题
-[source](https://stackoverflow.com/questions/79179992/flash-attention-flash-attn-package-fails-to-build-wheel-in-google-colab-due-to)
-```
-
-
-pip install torch=='2.4.1+cu121' torchvision=='0.19.1+cu121' torchaudio=='2.4.1+cu121' --index-url https://download.pytorch.org/whl/cu121
-pip install flash-attn --use-pep517 --no-build-isolation
-# 回退后其它包也要回退版本
-pip install numpy==2.1.1
-pip install packaging==24
-pip install pydantic==2.10.6
-```
-
-
-
-
-
-
-起初使用这种方式安装 flash_attn , 但启动依旧报错找不到包
-```
-wget https://github.com/Dao-AILab/flash-attention/releases/download/v2.6.3/flash_attn-2.6.3+cu123torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
-pip install --no-dependencies --upgrade flash_attn-2.6.3+cu123torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
-```
-
 
 ### finetune
 YOLO and Florence2 model
 
 
-#### florence2 
+### florence2 
 
 
 ```
@@ -189,9 +165,35 @@ RuntimeError: Input type (c10::Half) and bias type (float) should be the same
 
 **建议您按照这个优先级顺序，一次只调整一个核心变量来进行实验**，这样您就能清晰地看到每个调整带来的具体效果。从第一步开始，它将为您提供最有价值的反馈。
 
-### update
+ **update**
 尝试了 `lora_dropout = 0` 发现结果相同, 依旧那个图标没有成功识别, 其它正常识别, 怀疑数据问题, 尝试仅增加手动矫正的数据, 多些倍数, 应用阶段保留 50% , 增强阶段增加 4 倍. 最终比例大约为 8(矫正数据):2(原始数据)
 
 发现 lora train 时 val dataset 直接从sample 的数据里分割出 20%, 可能时因为这样导致的 train data 缺失那个 icon 的资料而无法识别, 改进code: val dataset 打乱数据后随机选择---原因确认
 
 目前尝试后确实 mutiplayer 为 5 或 4 效果最好, 某一组 loss 非常低, 且`Fold 3: 0.0488 (350 train, 48 val)` 经验证后也确实能识别所有标注的内容. 
+
+
+## resolution
+### 解决 flash_attn 安装慢, 安装后无法启动问题
+[source](https://stackoverflow.com/questions/79179992/flash-attention-flash-attn-package-fails-to-build-wheel-in-google-colab-due-to)
+```
+
+
+pip install torch=='2.4.1+cu121' torchvision=='0.19.1+cu121' torchaudio=='2.4.1+cu121' --index-url https://download.pytorch.org/whl/cu121
+pip install flash-attn --use-pep517 --no-build-isolation
+# 回退后其它包也要回退版本
+pip install numpy==2.1.1
+pip install packaging==24
+pip install pydantic==2.10.6
+```
+
+
+
+
+
+
+起初使用这种方式安装 flash_attn , 但启动依旧报错找不到包
+```
+wget https://github.com/Dao-AILab/flash-attention/releases/download/v2.6.3/flash_attn-2.6.3+cu123torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+pip install --no-dependencies --upgrade flash_attn-2.6.3+cu123torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+```

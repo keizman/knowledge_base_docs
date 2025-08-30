@@ -63,6 +63,15 @@ ulimit -n 65535
 2.CF_Account_ID 在 dash 主页面三个点点击后有 复制 account ID  选项, 
 
 ```
+#安装socat：
+apt install socat
+
+#安装acme：
+curl https://get.acme.sh | sh
+
+#添加软链接：
+ln -s  /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
+acme.sh --set-default-ca --server letsencrypt
 acme.sh --issue -d llmproai.xyz -d *.llmproai.xyz --dns dns_cf -k ec-256 --log ~/.acme.sh/acme.log 
 ```
 
